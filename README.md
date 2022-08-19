@@ -1,2 +1,2 @@
 # Test_Aula_LSW
- Testando na máquina do Senac
+ Atividades em aula de Linguagens de Sript para Web
