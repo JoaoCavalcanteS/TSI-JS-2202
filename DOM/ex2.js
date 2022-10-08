@@ -47,15 +47,6 @@ function calcularPreco(servico, prazo){
 
 
 
-
-
-
-
-
-
-
-
-
 /*ou fazer assim
 bntCalcular.addEventListener('click', executa(){
     function executa(evento){
