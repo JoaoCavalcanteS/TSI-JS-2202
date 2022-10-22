@@ -12,9 +12,45 @@ function carregaMonitoresDeEventos(){
     //evento para fazer o x funcionar(apagar tarefa)
     listaDeTarefas.addEventListener('click', apagarTarefa);
 
+    //evento para limpar toda lista
+    btnLimpaTudo.addEventListener('click', apagarTudo);
 
+    filtroDeTarefa.addEventListener('keyup', filtrar);
 }
 carregaMonitoresDeEventos();
+
+function filtrar(e) {
+
+    //capturamos o que o usuario esta digitando.
+    const procurado = e.target.value.toLowerCase();
+    //captura todos os elemetentos Li de uma vez.
+    const tarefa = document.querySelectorAll('collection-item');
+    //para cada terefa busque a string desejada.
+    tarefa.forEach(function (tarefa) {
+
+        // recuperamos apenas o texto do elemento
+        //li aonde está a tarefa. 
+        const TextoTarefa = tarefa.innertText;
+        // prucurando a string digitada no filtro
+        // no texto que esta no <li>
+        if(TextoTarefa.toLowerCase().indexOf(procurado) != -1) {
+                
+            tarefa.style.displays = 'block';
+            
+        } else {
+            
+            tarefa.style.displays = 'none';
+        }
+    });
+
+}
+
+function apagarTudo(evento){
+    
+   evento.preventDefault();
+   listaDeTarefas.innerHTML = '';
+}
+
 
 function apagarTarefa(evento){
     
@@ -31,8 +67,9 @@ function adicioneTarefa(evento){
 
     if(inputTarefa.value === '' ){
         alert('Entre com uma tarefa');
-    }
 
+    }
+    else{
     //cria li com a nova tarefa
     const LI = document.createElement('li');
     LI.className='collection-item';
@@ -49,9 +86,24 @@ function adicioneTarefa(evento){
     //monta o elemento li para colocar um ul
     A.appendChild(I);
     LI.appendChild(A);
-    inputTarefa.appendChild(LI);
+    listaDeTarefas.appendChild(LI);
+    
 
-
-    console.log(LI);
+    gravarTarefa(entradaTarefa.value);
+    entrada.value = '';
+    
+    }
 }
 
+function gravarTarefa(tarefa){
+    let tarefas = [];
+
+    let tarefaDoStorage = localStorage.getItem('tarefas');
+
+    if(tarefaDoStorage != null){
+        
+        tarefas = JSON.parse(tarefaDoStorage);
+    }
+    tarefa.push(tarefa);
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}
