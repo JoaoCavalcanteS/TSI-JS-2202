@@ -26,7 +26,7 @@ function mostraIpca(evento){
             anoMesString = anoString + '-' + mesString;
 
             if(parseInt(anoString) != anoUsuario){
-
+                return;
             }
 
             indice = parseFloat(mes.valor);
