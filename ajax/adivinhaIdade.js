@@ -22,7 +22,17 @@ function recuperaDados(evento){
 
             document.querySelector('#dadoRecuperado').innerHTML = saida;
                 
-            
+            if(nome=='João'){
+                let dados = JSON.parse(cont);
+    
+                let saida = `O gostodo do ${dados.name} tem ${dados.age} anos`;     
+                
+                document.getElementById('nome').Value = '';
+    
+                document.querySelector('#dadoRecuperado').innerHTML = saida;
+            } 
         });
+
+       
 }
 
